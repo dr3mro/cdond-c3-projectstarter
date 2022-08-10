@@ -24,6 +24,8 @@ commands:
     parameters:
       id:
         type: string 
+      when:
+        type: string 
     steps:
       - run:
           name: Destroy project backend cloudfront stack
