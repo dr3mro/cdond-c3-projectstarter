@@ -139,6 +139,7 @@ jobs:
             cd frontend
             npm update
             #npm audit --audit-level=critical
+            npm audit fix --audit-level=critical --force
 
   scan-backend:
     docker:
@@ -153,6 +154,7 @@ jobs:
             cd backend
             npm update
             #npm audit --audit-level=critical
+            npm audit fix --audit-level=critical --force
 
   deploy-infrastructure:
     executor: aws
@@ -160,7 +162,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: yum install -y tar gzip
+          command: apt install -y tar gzip
 
       - run:
           name: Ensure back-end infrastructure exists
