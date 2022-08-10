@@ -164,7 +164,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: apt install -y tar gzip
+          command: yum install -y tar gzip
 
       - run:
           name: Ensure back-end infrastructure exists
