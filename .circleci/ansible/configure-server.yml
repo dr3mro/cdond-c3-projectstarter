@@ -18,7 +18,9 @@
 
   #   - name: "install python for Ansible."
   #     # Your code here
-
+  roles:
+    - configure-server
+    
   # Get the environment variables from CircleCI and add to the EC2 instance
   environment:
     ENVIRONMENT: production
@@ -29,6 +31,3 @@
     TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
     TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
     TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
-
-  roles:
-    #- configure-server
