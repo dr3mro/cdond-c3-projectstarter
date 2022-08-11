@@ -20,42 +20,50 @@ parameters:
 
 commands:
   destroy_environment:
-    description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
+    description: Destroy Cloud Formation Stacks and infrastructure
     parameters:
-      id:
-        type: string 
       when:
-        type: string 
+        type: string
+      id:
+        type: string
     steps:
       - run:
-          name: Destroy project backend cloudfront stack
+          name: Destroy project backend cfn stack
           command: |
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
+          environment:
+            TERM: xterm-256color
+          when: << parameters.when >>
       - run:
-          name: Destroy project frontend cloudfront stack and S3Bucket
+          name: Destroy project frontend cfn stack and S3 bucket
           command: |
             aws s3 rm s3://udapeople-<< parameters.id >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.id >>
+          environment:
+            TERM: xterm-256color
+          when: << parameters.when >>
 
   revert_migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
-      id:
-        type: string 
       when:
-        type: string 
+        type: string
+      id:
+        type: string
     steps:
       - run:
           name: Revert migrations
+          working_directory: ./backend
           command: |
-            SUCCESS=$(curl https://kvdb.io/TZXbYB6NtgHFayUMY8PTuA/DB_MIGRATION_<< parameters.id >>)
-            if(( $SUCCESS=='failure' )); 
+            SUCCESS=$(curl -H "token: cacfed63-3a98-4951-958f-af5e5aa339b3" --request GET https://api.memstash.io/values/DB_MIGRATION_<< parameters.id >>)
+            echo $SUCCESS
+            if [[ "$SUCCESS" == "success" ]]
             then
-              cd backend
+              pwd
+              ls -la
               npm run migrations:revert
-              exit 1
             fi
-            
+          when: << parameters.when >> 
 jobs:
   build-frontend:
     docker:
@@ -453,7 +461,7 @@ workflows:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
             branches:
-              only: [test-feature-branch]
+              only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
       - run-migrations:
