@@ -182,7 +182,7 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople-backend-<<pipeline.parameters.workflow-id>>" \
               --output text)
-            curl https://kvdb.io/TZXbYB6NtgHFayUMY8PTuA/BACKEND_URL -d 'http://$BACKEND_IP:3030'
+            curl https://kvdb.io/TZXbYB6NtgHFayUMY8PTuA/BACKEND_URL -d http://$BACKEND_IP:3030
       - run:
           name: Ensure front-end infrastructure exist
           working_directory: ./.circleci/files
