@@ -435,6 +435,8 @@ jobs:
           name: Send migration results to KVDB
           working_directory: ./backend
           command: |
+            apt update && apt install ca-certificates
+            update-ca-certificates -f -v
             if grep -q "has been executed successfully" migration_status
             then
               echo "DB migration was successful, will update KVDB..."
