@@ -420,7 +420,8 @@ jobs:
           working_directory: /tmp
           command: |
             ls -la
-            sudo apt-get update && sudo apt-get install -yy less
+            sudo apt-get update && sudo apt-get upgrade -yy && sudo apt-get install -yy less ca-certificates
+            sudo update-ca-certificates -f -v
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
@@ -435,8 +436,6 @@ jobs:
           name: Send migration results to KVDB
           working_directory: ./backend
           command: |
-            apt update && apt install ca-certificates
-            update-ca-certificates -f -v
             if grep -q "has been executed successfully" migration_status
             then
               echo "DB migration was successful, will update KVDB..."
