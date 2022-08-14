@@ -18,6 +18,10 @@
     src: node_exporter.service
     dest: /etc/systemd/system/
 
+- name: "add prometheus username"
+  become: true
+  raw: sudo useradd --no-create-home node_exporter
+
 - name: "enable node_exporter service"
   become: true
   systemd:
