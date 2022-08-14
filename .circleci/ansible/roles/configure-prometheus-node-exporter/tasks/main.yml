@@ -20,7 +20,7 @@
 
 - name: "add prometheus username"
   become: true
-  raw: sudo useradd --no-create-home node_exporter
+  raw: sudo useradd --no-create-home node_exporter || true
 
 - name: "enable node_exporter service"
   become: true
