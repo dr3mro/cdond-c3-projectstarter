@@ -68,27 +68,27 @@ commands:
             fi
           when: << parameters.when >> 
 jobs:
-  notify:
-      docker:
-        - image: 'cimg/base:stable'
-      steps:
-        - slack/notify:
-            custom: |
-              {
-                "blocks": [
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "plain_text",
-                        "text": "*This is a text notification*",
-                        "emoji": true
-                      }
-                    ]
-                  }
-                ]
-              }
-            event: always
+  # notify:
+  #     docker:
+  #       - image: 'cimg/base:stable'
+  #     steps:
+  #       - slack/notify:
+  #           custom: |
+  #             {
+  #               "blocks": [
+  #                 {
+  #                   "type": "section",
+  #                   "fields": [
+  #                     {
+  #                       "type": "plain_text",
+  #                       "text": "*This is a text notification*",
+  #                       "emoji": true
+  #                     }
+  #                   ]
+  #                 }
+  #               ]
+  #             }
+  #           event: always
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -134,7 +134,12 @@ jobs:
       - save_cache:
           paths: [backend/dist]
           key: backend-dist
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   test-frontend:
     docker:
@@ -150,7 +155,12 @@ jobs:
             cd frontend
             npm run test
             exit 0
-                
+       - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1               
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -164,7 +174,12 @@ jobs:
             cd backend
             npm run test
             exit 0
-            
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1          
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -180,7 +195,12 @@ jobs:
             npm update
             #npm audit --audit-level=critical
             npm audit fix --audit-level=critical --force
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -196,7 +216,12 @@ jobs:
             npm update
             #npm audit --audit-level=critical
             npm audit fix --audit-level=critical --force
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
   deploy-infrastructure:
     executor: aws
     steps:
@@ -249,7 +274,12 @@ jobs:
       - destroy_environment:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail
-   
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1 
 
   configure-infrastructure:
     executor: python
@@ -277,7 +307,12 @@ jobs:
       - destroy_environment:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail
-    
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1    
 
   deploy-frontend:
     executor: node
@@ -315,7 +350,12 @@ jobs:
       - revert_migrations:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail    
-                    
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1                   
   deploy-backend:
     executor: python
     steps:
@@ -349,7 +389,12 @@ jobs:
       - destroy_environment:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail 
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
   smoke-test:
     executor: python
     steps:
@@ -380,7 +425,12 @@ jobs:
       - revert_migrations:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
   cloudfront-update:
     executor: aws
     steps:
@@ -412,7 +462,12 @@ jobs:
       - revert_migrations:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
 
   cleanup:
@@ -435,7 +490,12 @@ jobs:
             fi
           environment:
             TERM: xterm-256color
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
   run-migrations:
     executor: node
     steps:
@@ -477,7 +537,13 @@ jobs:
       - destroy_environment:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail
-      # Here's where you will add some code to rollback on failure            
+      # Here's where you will add some code to rollback on failure 
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1           
 workflows:
   send-notification:
     jobs:
