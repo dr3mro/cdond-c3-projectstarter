@@ -549,7 +549,7 @@ workflows:
     jobs:
       - notify:
           context: slack-secrets
-          text: "Workfolw started"
+          message: "Workfolw started"
 
   default:
     jobs:
