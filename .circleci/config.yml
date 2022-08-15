@@ -18,7 +18,7 @@ executors:
 parameters:
   workflow-id:
     type: string
-    default: "8891"
+    default: "8892"
 
 
 commands:
@@ -447,10 +447,10 @@ jobs:
           working_directory: ./.circleci/files
           command: |
             WorkflowID=$(aws cloudformation \
-              list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+              list-exports --query "Exports[?Name=='WorkflowID'].Value" \
               --no-paginate --output text)
             echo "WorkflowID: " $WorkflowID
-            curl https://kvdb.io/CcQeWJgcDA33jZSnjnDwTM/WorkflowID -d $WorkflowID || true
+            curl https://kvdb.io/CcQeWJgcDA33jZSnjnDwTM/WorkflowID -d $WorkflowID
       - run:
           name: Update cloudfront distribution
           working_directory: ./.circleci/files

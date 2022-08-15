@@ -1,6 +1,14 @@
- [URL01]
-    https://github.com/dr3mro/cdond-c3-projectstarter
+[URL01]
+	https://github.com/dr3mro/cdond-c3-projectstarter
 
- [URL02]    
-    https://udapeople-8889.s3.amazonaws.com/index.html
+[URL02]    
+	https://udapeople-8889.s3.amazonaws.com/index.html
 
+[URL03]:
+	https://d1ncf89isv0mid.cloudfront.net
+
+[URL04]:
+	http://ec2-3-88-68-76.compute-1.amazonaws.com:3030
+
+[URL05]:
+	http://ec2-54-224-149-33.compute-1.amazonaws.com:9090/targets
