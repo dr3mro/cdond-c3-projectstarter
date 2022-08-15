@@ -408,6 +408,7 @@ jobs:
           command: |
             apk add --update curl nodejs npm
             pip install awscli
+            exit 1
       - run:
           name: Backend smoke test.
           working_directory: ./backend
