@@ -419,6 +419,7 @@ jobs:
           command: |
             URL="http://udapeople-<<pipeline.parameters.workflow-id>>.s3.amazonaws.com/index.html"
             curl -s ${URL} | grep -q "Welcome"
+            exit 1
 
       # Here's where you will add some code to rollback on failure
       - destroy_environment:
