@@ -19,7 +19,7 @@
         timeout: 60
 
     - name: "install python for Ansible."
-      raw: apt -y update && apt install -y python-minimal
+      raw: apt -y update && apt install -y python-minimal curl
 
   roles:
     - configure-server
