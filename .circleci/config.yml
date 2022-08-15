@@ -296,6 +296,7 @@ jobs:
           command: |
             apk add --update ansible
             ansible --version
+            apk add curl
       - run:
           name: Configure server
           working_directory: ./.circleci/ansible
