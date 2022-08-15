@@ -68,27 +68,27 @@ commands:
             fi
           when: << parameters.when >> 
 jobs:
-  # notify:
-  #     docker:
-  #       - image: 'cimg/base:stable'
-  #     steps:
-  #       - slack/notify:
-  #           custom: |
-  #             {
-  #               "blocks": [
-  #                 {
-  #                   "type": "section",
-  #                   "fields": [
-  #                     {
-  #                       "type": "plain_text",
-  #                       "text": "*This is a text notification*",
-  #                       "emoji": true
-  #                     }
-  #                   ]
-  #                 }
-  #               ]
-  #             }
-  #           event: always
+  notify:
+      docker:
+        - image: 'cimg/base:stable'
+      steps:
+        - slack/notify:
+            custom: |
+              {
+                "blocks": [
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "plain_text",
+                        "text": "*This is a text notification*",
+                        "emoji": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            event: always
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -113,7 +113,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
 
   build-backend:
     docker:
@@ -139,7 +139,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
 
   test-frontend:
     docker:
@@ -160,7 +160,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1               
+          template: basic_success_1              
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -179,7 +179,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1          
+          template: basic_success_1        
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -200,7 +200,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -221,7 +221,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
   deploy-infrastructure:
     executor: aws
     steps:
@@ -279,7 +279,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1 
+          template: basic_success_1
 
   configure-infrastructure:
     executor: python
@@ -312,7 +312,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1    
+          template: basic_success_1   
 
   deploy-frontend:
     executor: node
@@ -355,7 +355,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1                   
+          template: basic_success_1                   
   deploy-backend:
     executor: python
     steps:
@@ -430,7 +430,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
   cloudfront-update:
     executor: aws
     steps:
@@ -467,7 +467,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
 
 
   cleanup:
@@ -495,7 +495,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
   run-migrations:
     executor: node
     steps:
@@ -543,12 +543,13 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1           
+          template: basic_success_1          
 workflows:
   send-notification:
     jobs:
       - notify:
           context: slack-secrets
+          text: "Workfolw started"
 
   default:
     jobs:
