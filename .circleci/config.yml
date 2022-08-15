@@ -81,7 +81,7 @@ jobs:
                     "fields": [
                       {
                         "type": "plain_text",
-                        "text": "Workflow started",
+                        "text": "Workflow started << pipeline.parameters.workflow-id >>",
                         "emoji": true
                       }
                     ]
@@ -102,7 +102,6 @@ jobs:
             cd frontend
             sudo npm i
             sudo npm run build
-            exit 1
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
