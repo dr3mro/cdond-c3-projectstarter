@@ -102,6 +102,7 @@ jobs:
             cd frontend
             sudo npm i
             sudo npm run build
+            exit 1
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -305,7 +306,6 @@ jobs:
             ls -la
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
-            exit 1
       - destroy_environment:
           id: <<pipeline.parameters.workflow-id>>
           when: on_fail
