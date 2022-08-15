@@ -58,7 +58,7 @@ commands:
           name: Revert migrations
           working_directory: ./backend
           command: |
-            SUCCESS=$(curl -H "token: cacfed63-3a98-4951-958f-af5e5aa339b3" --request GET https://api.memstash.io/values/DB_MIGRATION_<< parameters.id >>)
+            SUCCESS=$(curl https://kvdb.io/CcQeWJgcDA33jZSnjnDwTM/DB_MIGRATION_<<pipeline.parameters.workflow-id>>)
             echo $SUCCESS
             if [[ "$SUCCESS" == "success" ]]
             then
