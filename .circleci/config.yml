@@ -81,7 +81,7 @@ jobs:
                     "fields": [
                       {
                         "type": "plain_text",
-                        "text": "*This is a text notification*",
+                        "text": "Workflow started",
                         "emoji": true
                       }
                     ]
@@ -549,7 +549,6 @@ workflows:
     jobs:
       - notify:
           context: slack-secrets
-          message: "Workfolw started"
 
   default:
     jobs:
