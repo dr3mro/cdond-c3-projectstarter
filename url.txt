@@ -1,0 +1,21 @@
+1) prometheus server 
+    https://ec2-52-55-71-88.compute-1.amazonaws.com:9090/targets
+
+2) alertmanager 
+    https://ec2-52-55-71-88.compute-1.amazonaws.com:9093
+
+3) cloud front url
+    https://d1ncf89isv0mid.cloudfront.net
+
+4) aws rds endpoint port 5432 
+    udapeople-database.cu28hfzju1kp.us-east-1.rds.amazonaws.com
+
+5) backend ec2 
+    ec2-3-82-246-15.compute-1.amazonaws.com:3030
+
+6) s3 bucket front end 
+    https://udapeople-8889.s3.amazonaws.com/index.html
+
+
+7) github repo 
+    https://github.com/dr3mro/cdond-c3-projectstarter
