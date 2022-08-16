@@ -29,7 +29,7 @@
     become: true
     command: |
       . .env
-      node main.js
+      pm2 start -f ./main.js 
     args:
       chdir: /home/ubuntu/uda_app/dist
     environment:
