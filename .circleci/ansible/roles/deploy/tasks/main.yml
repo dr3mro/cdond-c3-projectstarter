@@ -28,7 +28,8 @@
   - name: "start server"
     become: true
     command: |
-      sudo . .env && sudo pm2 start -f ./main.js 
+          export $(cat .env | xargs)
+          pm2 start -f ./main.js 
     args:
       chdir: /home/ubuntu/uda_app/dist
     environment:
