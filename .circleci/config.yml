@@ -342,12 +342,12 @@ jobs:
                               --output text)
             
             echo "API_URL = ${API_URL}"
-            echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
+            echo API_URL="http://${BACKEND_IP}:3030" >> .env
 
             echo "BACKEND_URL" ${BACKEND_IP}
-            echo "BACKEND_URL" ${BACKEND_IP} >> frontend/.env
+            echo "BACKEND_URL" ${BACKEND_IP} >> .env
 
-            cat frontend/.env
+            cat .env
             npm run build
       - run:
           name: Deploy frontend objects to S3
