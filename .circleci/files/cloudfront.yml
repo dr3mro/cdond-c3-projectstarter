@@ -26,6 +26,14 @@ Resources:
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}"
         Enabled: True
         DefaultRootObject: index.html
+        AllowedMethods:
+          - GET
+          - HEAD
+          - POST
+          - PUT
+          - PATCH
+          - OPTIONS
+          - DELETE
         DefaultCacheBehavior:
           ForwardedValues:
             QueryString: False
