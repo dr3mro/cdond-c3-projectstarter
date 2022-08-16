@@ -28,8 +28,8 @@
   - name: "start server"
     become: true
     command: |
-      echo "user_name:" $TYPEORM_DATABASE
-      pm2 start -f ./main.js > ~/status.txt
+      . .env
+      node main.js
     args:
       chdir: /home/ubuntu/uda_app/dist
     environment:
