@@ -2,13 +2,13 @@
 	https://github.com/dr3mro/cdond-c3-projectstarter
 
 [URL02]    
-	http://udapeople-8892.s3.amazonaws.com/index.html
+	http://udapeople-8893.s3.amazonaws.com/index.html
 
 [URL03]:
 	http://d1ncf89isv0mid.cloudfront.net
 
 [URL04]:
-	ec2-18-207-128-39.compute-1.amazonaws.com:3030
+	ec2-35-175-217-162.compute-1.amazonaws.com:3030
 
 [URL05]:
 	https://ec2-18-206-140-15.compute-1.amazonaws.com:9090/targets
