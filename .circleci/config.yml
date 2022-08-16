@@ -334,7 +334,19 @@ jobs:
           working_directory: ./frontend
           command: |
             export API_URL=$(curl https://kvdb.io/CcQeWJgcDA33jZSnjnDwTM/BACKEND_URL)
-            echo "${API_URL}"
+            
+            export BACKEND_IP=$(aws ec2 describe-instances \
+                              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+                              --filters "Name=tag:project,Values=udapeople-backend-<<pipeline.parameters.workflow-id>>" \
+                              --output text)
+            
+            echo "API_URL = ${API_URL}"
+            echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
+
+            echo "BACKEND_URL" ${BACKEND_IP}
+            echo "BACKEND_URL" ${BACKEND_IP} >> frontend/.env
+
+            cat frontend/.env
             npm run build
       - run:
           name: Deploy frontend objects to S3
