@@ -398,6 +398,7 @@ jobs:
           name: Deploy backend
           working_directory: ./.circleci/ansible
           command: |
+            export $(curl https://raw.githubusercontent.com/dr3mro/cdond-c3-projectstarter/master/backend/.env | xargs)
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy_environment:
