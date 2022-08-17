@@ -7,7 +7,7 @@ After=network-online.target
 Type=simple
 StandardOutput=journal
 WorkingDirectory=/home/ubuntu/uda_app/dist/
-ExecStart=/bin/bash -c '/usr/local/bin/node main.js'
+ExecStart=/bin/bash /home/ubuntu/.bin/start.sh
 
 [Install]
 WantedBy=default.target

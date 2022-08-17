@@ -26,15 +26,26 @@
     ignore_errors: true
 
 
-  - name: Creates directory
+  - name: create systemd user dir
     file:
       path: /home/ubuntu/.config/systemd/user/
       state: directory
 
+  - name: create bin user dir 
+    file:
+      path: /home/ubuntu/.bin
+      state: directory
+    
   - name: "add node autostart configuration."
     copy:
       src: uda_app.service
       dest: /home/ubuntu/.config/systemd/user/
+
+  - name: "copy start script."
+    copy:
+      src: start.sh
+      dest: /home/ubuntu/.bin
+      mode: '0777'
 
   - name: "start uda_app service"
     systemd:
