@@ -25,9 +25,14 @@
     command: pm2 delete all
     ignore_errors: true
 
-  - name: "start server"
-    become: false
-    command: systemctl enable uda_app.service --user --now
+
+  - name: "daemon reload"
+    systemd:
+      daemon_reload: yes
+      enabled: yes
+      state: restarted 
+      scope: user
+      name: uda_app
     args:
       chdir: /home/ubuntu/uda_app/dist
     environment:

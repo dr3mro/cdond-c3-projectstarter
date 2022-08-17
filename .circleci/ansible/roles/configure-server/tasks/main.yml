@@ -56,8 +56,3 @@
   copy:
     src: uda_app.service
     dest: /home/ubuntu/.config/systemd/user/
-
-- name: "enable uda_app service"
-  systemd:
-    daemon_reload: yes
-    scope: user
