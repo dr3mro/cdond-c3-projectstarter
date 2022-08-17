@@ -2,14 +2,14 @@
     shell: env
 
   - name: "copy backend binaries"
-    become: yes
+    become: true
     synchronize:
       src: ../../backend/dist
       dest: /home/ubuntu/uda_app
       recursive: true
 
   - name: "copy node_modules"
-    become: yes
+    become: true
     synchronize:
       src: ../../backend/node_modules
       dest: /home/ubuntu/uda_app
@@ -26,15 +26,13 @@
     ignore_errors: true
 
 
-  - name: "daemon reload"
+  - name: "start uda_app service"
     systemd:
       daemon_reload: yes
       enabled: yes
       state: restarted 
       scope: user
       name: uda_app
-    args:
-      chdir: /home/ubuntu/uda_app/dist
     environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
