@@ -1,0 +1,13 @@
+[Unit]
+Description=Node start on boot 
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=ubuntu
+Type=simple
+WorkingDirectory=/home/ubuntu/uda_app/dist/
+ExecStart=/usr/local/bin/node main.js
+
+[Install]
+WantedBy=multi-user.target

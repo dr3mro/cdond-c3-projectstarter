@@ -27,7 +27,7 @@
 
   - name: "start server"
     become: true
-    command: pm2 start -f ./main.js 
+    command: systemd enable uda_app.service --now
     args:
       chdir: /home/ubuntu/uda_app/dist
     environment:
