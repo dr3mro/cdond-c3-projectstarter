@@ -7,7 +7,7 @@ After=network-online.target
 User=ubuntu
 Type=simple
 WorkingDirectory=/home/ubuntu/uda_app/dist/
-ExecStart=/usr/local/bin/node main.js
+ExecStart=/bin/bash -c '/usr/local/bin/node main.js'
 
 [Install]
 WantedBy=multi-user.target
