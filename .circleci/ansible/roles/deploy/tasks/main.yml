@@ -32,7 +32,6 @@
       state: directory
 
   - name: "add node autostart configuration."
-    become: true
     copy:
       src: uda_app.service
       dest: /home/ubuntu/.config/systemd/user/
