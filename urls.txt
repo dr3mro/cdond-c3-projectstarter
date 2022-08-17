@@ -11,5 +11,5 @@
 	ec2-54-226-183-77.compute-1.amazonaws.com:3030
 
 [URL05]:
-	ec2-54-86-98-209.compute-1.amazonaws.com:9090/targets
+	ec2-23-20-235-28.compute-1.amazonaws.com:9090/targets
 	
