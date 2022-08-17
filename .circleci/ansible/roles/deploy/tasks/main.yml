@@ -21,15 +21,9 @@
     ignore_errors: true
 
   - name: "delete anything that might already be running"
-    
     become: true
     command: pm2 delete all
     ignore_errors: true
-
-  - name: "make env vars permanent"
-    command: echo export $(curl https://raw.githubusercontent.com/dr3mro/cdond-c3-projectstarter/master/backend/.env | xargs) >> .profile
-    args:
-    chdir: /home/ubuntu/
 
   - name: "start server"
     become: true

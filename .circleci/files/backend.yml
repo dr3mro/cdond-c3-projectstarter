@@ -37,3 +37,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub backend-${ID}
+      UserData: 
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          echo export $(curl https://raw.githubusercontent.com/dr3mro/cdond-c3-projectstarter/master/backend/.env | xargs) >> /home/ubuntu/.profile
