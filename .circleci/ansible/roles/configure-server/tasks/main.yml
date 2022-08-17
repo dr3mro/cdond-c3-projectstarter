@@ -46,17 +46,16 @@
     production: yes
     state: present
 
-- name: "add user systemd dir"
-  become: true
-  command:  mkdir -p /home/ubuntu/.config/systemd/user/
+- name: Creates directory
+  file:
+    path: /home/ubuntu/.config/systemd/user/
+    state: directory
 
 - name: "add node autostart configuration."
   become: true
   copy:
     src: uda_app.service
     dest: /home/ubuntu/.config/systemd/user/
-  notify:
-    - reload systemd
 
 - name: "reload systemd"
   command: systemctl daemon-reload --user
