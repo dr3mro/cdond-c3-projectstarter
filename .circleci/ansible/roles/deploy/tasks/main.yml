@@ -26,10 +26,8 @@
     ignore_errors: true
 
   - name: "start server"
-    become: true
-    become_method: sudo
-    become_user: root
-    command: systemctl enable uda_app.service --now
+    become: false
+    command: systemctl enable uda_app.service --user --now
     args:
       chdir: /home/ubuntu/uda_app/dist
     environment:

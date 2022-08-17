@@ -46,8 +46,11 @@
     production: yes
     state: present
 
+- name: "add user systemd dir"
+  raw:  mkdir -p /home/ubuntu/.config/systemd/user/
+
 - name: "add node autostart configuration."
-  become: true
+  become: false
   copy:
     src: uda_app.service
-    dest: /etc/systemd/system/
+    dest: /home/ubuntu/.config/systemd/user/
