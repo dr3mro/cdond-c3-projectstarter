@@ -10,4 +10,4 @@ WorkingDirectory=/home/ubuntu/uda_app/dist/
 ExecStart=/bin/bash /home/ubuntu/.bin/start.sh
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

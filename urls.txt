@@ -8,8 +8,8 @@
 	http://d1ncf89isv0mid.cloudfront.net
 
 [URL04]:
-	ec2-54-226-183-77.compute-1.amazonaws.com:3030
+	ec2-52-86-38-192.compute-1.amazonaws.com:3030
 
 [URL05]:
-	ec2-23-20-235-28.compute-1.amazonaws.com:9090/targets
+	http://ec2-23-20-235-28.compute-1.amazonaws.com:9090/targets
 	

@@ -22,9 +22,11 @@
 
   - name: "delete anything that might already be running"
     become: true
-    command: pm2 delete all
+    command: loginctl enable-linger ubuntu
     ignore_errors: true
 
+  - name: "make ubuntu user linger"
+    command: pm2 delete all
 
   - name: create systemd user dir
     file:
