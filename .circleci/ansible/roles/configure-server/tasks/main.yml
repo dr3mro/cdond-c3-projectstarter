@@ -47,10 +47,16 @@
     state: present
 
 - name: "add user systemd dir"
-  raw:  mkdir -p /home/ubuntu/.config/systemd/user/
+  become: true
+  command:  mkdir -p /home/ubuntu/.config/systemd/user/
 
 - name: "add node autostart configuration."
-  become: false
+  become: true
   copy:
     src: uda_app.service
     dest: /home/ubuntu/.config/systemd/user/
+  notify:
+    - reload systemd
+
+- name: "reload systemd"
+  command: systemctl daemon-reload --user
